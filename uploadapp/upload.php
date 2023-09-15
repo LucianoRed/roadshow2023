@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'aws/aws-autoloader.php';
+require_once "Kafka.class.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploads/";
@@ -74,6 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 // Jogando para Kafka
                 // ===========================
                     echo $json_results;
+                    $Kafka = new Kafka;
+                    $Kafka->kafka_server = getenv("KAFKA_BROKERS");
+                    $Kafka->kafka_topic = getenv("KAFKA_TOPIC");
             } catch (Exception $e) {
                 echo "Error analyzing the image: " . $e->getMessage();
             }
