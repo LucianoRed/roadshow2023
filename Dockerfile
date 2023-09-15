@@ -25,8 +25,9 @@ COPY DockerConfigFiles/000-default.conf /etc/apache2/sites-available/000-default
 COPY DockerConfigFiles/ports.conf /etc/apache2/ports.conf
 COPY DockerConfigFiles/php.ini /usr/local/etc/php/
 RUN a2enmod remoteip && a2enmod headers
-RUN chown 12345 /var/www/html && mkdir /logs && chmod 777 /logs
+RUN chown 12345 /var/www/html && mkdir /logs && chmod 777 /logs 
 ADD uploadapp/ /var/www/html/
+RUN chmod -R 777 /var/www/html/uploads/
 
 EXPOSE 8080
 
