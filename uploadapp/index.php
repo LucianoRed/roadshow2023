@@ -15,7 +15,7 @@
                 <label for="image">Choose an image:</label>
                 <input type="file" name="image" id="image" class="form-control-file">
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" name="submit" class="btn btn-primary">Upload</button>
         </form>
     </div>
 </body>
