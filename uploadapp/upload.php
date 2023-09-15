@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         echo "Sorry, your file was not uploaded.";
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded as " . $sessionId . "_" . basename($_FILES["image"]["name"]) . ".";
+          //  echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded as " . $sessionId . "_" . basename($_FILES["image"]["name"]) . ".";
 
             // Now, send the image to Amazon Rekognition for analysis
             //require 'vendor/autoload.php'; // Include the AWS SDK for PHP
@@ -64,13 +64,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 ]);
 
                 // Process the result (e.g., display labels)
-                echo "<h2>Labels Detected:</h2>";
-                $json_results = json_encode($result);
+                // echo "<h2>Labels Detected:</h2>";
+                $json_results = json_encode($result['Labels']);
               //  var_dump($json_results);
                 // foreach ($result['Labels'] as $label) {
                 //     echo $label['Name'] . ": " . $label['Confidence'] . "%<br>";
                 // }
-                echo $json_results;
+                // ===========================
+                // Jogando para Kafka
+                // ===========================
+                    echo $json_results;
             } catch (Exception $e) {
                 echo "Error analyzing the image: " . $e->getMessage();
             }
