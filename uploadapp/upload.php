@@ -66,10 +66,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 // Process the result (e.g., display labels)
                 echo "<h2>Labels Detected:</h2>";
                 $json_results = json_encode($result);
-                var_dump($json_results);
-                foreach ($result['Labels'] as $label) {
-                    echo $label['Name'] . ": " . $label['Confidence'] . "%<br>";
-                }
+              //  var_dump($json_results);
+                // foreach ($result['Labels'] as $label) {
+                //     echo $label['Name'] . ": " . $label['Confidence'] . "%<br>";
+                // }
+                echo $json_results;
             } catch (Exception $e) {
                 echo "Error analyzing the image: " . $e->getMessage();
             }
