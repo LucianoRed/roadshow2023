@@ -3,7 +3,7 @@ class Kafka {
     public $kafka_server;
     public $kafka_topic;
 
-    public function ProduzMensagem($mensagem, $topico) {
+    public function ProduzMensagem($mensagem) {
 // $brokers = getenv("KAFKA_BROKERS");
 //$topic = getenv("KAFKA_TOPIC");
 $brokers = $this->kafka_server;
