@@ -68,13 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 // echo "<h2>Labels Detected:</h2>";
                 $json_results = json_encode($result['Labels']);
               //  var_dump($json_results);
-                // foreach ($result['Labels'] as $label) {
-                //     echo $label['Name'] . ": " . $label['Confidence'] . "%<br>";
-                // }
+                foreach ($result['Labels'] as $label) {
+                    echo "Encontrado ".$label['Name'] . "com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
+                }
                 // ===========================
                 // Jogando para Kafka
                 // ===========================
-                    echo $json_results;
+                   // echo $json_results;
                     $Kafka = new Kafka;
                     $Kafka->kafka_server = getenv("KAFKA_BROKERS");
                     $Kafka->kafka_topic = getenv("KAFKA_TOPIC");
