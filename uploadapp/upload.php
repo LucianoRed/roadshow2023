@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 $json_results = json_encode($result['Labels']);
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
-                    echo "Encontrado ".$label['Name'] . "com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
+                    echo "Encontrado <b>".$label['Name'] . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
                 }
                 // ===========================
                 // Jogando para Kafka
