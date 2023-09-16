@@ -3,32 +3,37 @@
 
   sources:
     - ansible.eda.kafka:
-        host: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
-        port: 9092
-        topic: imagens
-        group_id: ansible-eda
+        host: "{{ BROKER }}"
+        port: "{{ BROKER_PORT }}"
+        topic: "{{ BROKER_TOPIC }}"
+        group_id: ansible-eda2
     - ansible.eda.webhook:
         host: 0.0.0.0
-        port: 8080
+        port: 8081
 
   rules:
+    - name: debug with multiple messages
+      condition: event.i >= 0
+      action:
+        debug:
+          msg: "Mensagemmmmmmmmmmmmmm 1 {{ event }}"
     - name: kafka
-      condition: event.message != ""
+      condition: event.message == ""
       action:
         run_job_template:
-          name: StorageRemediation
+          name: "{{ JOB_TEMPLATE }}"
           organization: Default
           job_args:
             extra_vars:
-              message: "from eda"
+              message: "from eda kafka"
               sleep: 1
     - name: webhook
       condition: event.payload.message != ""
       action:
         run_job_template:
-          name: StorageRemediation
+          name: "{{ JOB_TEMPLATE }}"
           organization: Default
           job_args:
             extra_vars:
-              message: "from eda"
+              message: "{{ event.payload.message }}"
               sleep: 1
