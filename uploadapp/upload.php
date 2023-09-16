@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector de artefatos</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 <?php
 session_start();
 require_once 'aws/aws-autoloader.php';
@@ -88,3 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     }
 }
 ?>
+ <a href="index.php"><button type="button" name="voltar" class="btn btn-primary">Testar outra foto</button></a>
+</body>
+</html>
