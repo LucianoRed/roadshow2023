@@ -14,7 +14,7 @@
         playButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 const audioFile = button.getAttribute("data-audio");
-                const audioSource = "https://roadshow-2023-git2-upload.apps.teste.sandbox2448.opentlc.com/polly.php?label=" + encodeURIComponent(audioFile);
+                const audioSource = "polly.php?label=" + encodeURIComponent(audioFile);
 
                 audioPlayer.src = audioSource;
                 audioPlayer.load(); // Load the new audio source
