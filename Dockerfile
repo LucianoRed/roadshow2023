@@ -27,7 +27,7 @@ COPY DockerConfigFiles/php.ini /usr/local/etc/php/
 RUN a2enmod remoteip && a2enmod headers
 RUN chown 12345 /var/www/html && mkdir /logs && chmod 777 /logs 
 ADD uploadapp/ /var/www/html/
-RUN chmod -R 777 /var/www/html/uploads/ && chmod 777 /var/www/html/upload.php
+RUN chmod -R 777 /var/www/html/uploads/ && chmod 777 /var/www/html/upload.php && chmod 777 /var/www/html/index.php
 
 EXPOSE 8080
 
