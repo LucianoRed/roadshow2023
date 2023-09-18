@@ -12,8 +12,26 @@
         height: auto;
     }
 </style>
-
-<img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" alt="Descrição da imagem" class="imagem-responsiva">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function speakLabel(label) {
+        // Call Amazon Polly to synthesize and speak the label
+        $.ajax({
+            url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
+            type: 'POST',
+            data: { label: label },
+            success: function(response) {
+                // Handle Polly response (e.g., play the audio)
+                alert(response);
+            },
+            error: function() {
+                // Handle Polly synthesis error
+                alert('Error synthesizing speech.');
+            }
+        });
+    }
+</script>
+<img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva">
 
 </head>
 <body>
