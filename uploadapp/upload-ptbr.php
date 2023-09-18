@@ -6,6 +6,25 @@
     <title>Detector de artefatos</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function speakLabel(label) {
+        // Call Amazon Polly to synthesize and speak the label
+        $.ajax({
+            url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
+            type: 'POST',
+            data: { label: label },
+            success: function(response) {
+                // Handle Polly response (e.g., play the audio)
+                alert(response);
+            },
+            error: function() {
+                // Handle Polly synthesis error
+                alert('Error synthesizing speech.');
+            }
+        });
+    }
+</script>
 </head>
 <body>
 <?php
