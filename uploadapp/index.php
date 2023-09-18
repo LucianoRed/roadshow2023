@@ -31,11 +31,13 @@
         });
     }
 </script>
-<img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva">
+<!-- <img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva"> -->
 
 </head>
 <body>
-<img src="caminho-da-sua-imagem.jpg" alt="Descrição da imagem" class="img-fluid">
+<!-- <img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" alt="Descrição da imagem" class="img-fluid"> -->
+<img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva">
+
 
     <div class="container mt-5">
         <h1>Detector de artefatos</h1>

@@ -1,5 +1,6 @@
 <?php
-require 'vendor/autoload.php'; // Include the AWS SDK for PHP
+// require 'vendor/autoload.php'; // Include the AWS SDK for PHP
+require_once 'aws/aws-autoloader.php';
 
 use Aws\Polly\PollyClient;
 
