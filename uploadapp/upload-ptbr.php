@@ -85,9 +85,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 $json_results = json_encode($result['Labels']);
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
+                    $inteiropercent = intval($label['Confidence']);
+                    if($inteiropercent > 85) {
                     $translatedLabel = translateText($label['Name'], 'pt');
                     echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
                     echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
+                    } else {
+                        echo "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.";
+                        //echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
+
+                    }
 
                 }
                 // ===========================
