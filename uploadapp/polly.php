@@ -19,13 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["label"])) {
     ]);
 
     $label = $_GET["label"];
-    $voiceId = 'Joanna'; // Change to the desired voice
+    $voiceId = 'Camila'; // Change to the desired voice
 
     try {
         $result = $polly->synthesizeSpeech([
             'OutputFormat' => 'mp3',
             'Text' => $label,
             'VoiceId' => $voiceId,
+            'LanguageCode' => 'pt-BR',
         ]);
     
         // Return the audio as a blob
