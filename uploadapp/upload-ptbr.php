@@ -8,31 +8,36 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    function speakLabel(label) {
-        // Call Amazon Polly to synthesize and speak the label
-        $.ajax({
-            url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
-            type: 'GET',
-            data: { label: label },
-            success: function(response) {
-                // Handle Polly response (e.g., play the audio)
-                var audio = new Audio('data:audio/mpeg;base64,' + response);
-                audio.id = 'audio_' + label;
-                audio.controls = true;
-                audio.style.display = 'block';
+   function speakLabel(label) {
+    // Call Amazon Polly to synthesize and speak the label
+    $.ajax({
+        url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
+        type: 'GET',
+        data: { label: label },
+        responseType: 'blob', // Set the response type to blob
+        success: function(response) {
+            // Create a Blob URL from the audio blob
+            var blob = new Blob([response], { type: 'audio/mpeg' });
+            var url = window.URL.createObjectURL(blob);
 
-                // Append the audio element to the document
-                document.body.appendChild(audio);
+            // Create an audio element to play the audio
+            var audio = new Audio(url);
 
-                // Play the audio
-                audio.play();
-            },
-            error: function() {
-                // Handle Polly synthesis error
-                alert('Error synthesizing speech.');
-            }
-        });
-    }
+            // Play the audio
+            audio.play().then(function () {
+                // Audio playback started
+            }).catch(function (error) {
+                // Handle any playback errors
+                console.error('Audio playback error: ' + error.message);
+            });
+        },
+        error: function() {
+            // Handle Polly synthesis error
+            alert('Error synthesizing speech.');
+        }
+    });
+}
+
 </script>
 
 </head>
