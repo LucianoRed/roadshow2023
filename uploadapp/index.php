@@ -15,21 +15,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function speakLabel(label) {
-        // Call Amazon Polly to synthesize and speak the label
-        $.ajax({
-            url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
-            type: 'POST',
-            data: { label: label },
-            success: function(response) {
-                // Handle Polly response (e.g., play the audio)
-                alert(response);
-            },
-            error: function() {
-                // Handle Polly synthesis error
-                alert('Error synthesizing speech.');
-            }
-        });
-    }
+    // Call Amazon Polly to synthesize and speak the label
+    $.ajax({
+        url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
+        type: 'GET',
+        data: { label: label },
+        responseType: 'blob', // Set the response type to blob
+        success: function(response) {
+            // Create a Blob URL from the audio blob
+            var blob = new Blob([response], { type: 'audio/mpeg' });
+            var url = window.URL.createObjectURL(blob);
+
+            // Create an <audio> element and set its source to the Blob URL
+            var audio = new Audio(url);
+
+            // Play the audio
+            audio.play();
+        },
+        error: function() {
+            // Handle Polly synthesis error
+            alert('Error synthesizing speech.');
+        }
+    });
+}
+
 </script>
 <!-- <img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva"> -->
 
