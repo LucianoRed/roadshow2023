@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +16,6 @@
 <body>
 <div>
 <?php
-session_start();
 require_once 'aws/aws-autoloader.php';
 require_once "Kafka.class.php";
 
