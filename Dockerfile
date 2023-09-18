@@ -21,7 +21,7 @@ RUN docker-php-ext-install mysqli && \
     pecl install memcached && \
     docker-php-ext-install -j$(nproc) iconv && \
     rm -r /tmp/* /var/cache/* && rm -rf /var/lib/apt/lists/*
-
+RUN docker-php-ext-enable memcached
 COPY DockerConfigFiles/apache2.conf /etc/apache2/apache2.conf
 COPY DockerConfigFiles/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY DockerConfigFiles/ports.conf /etc/apache2/ports.conf
