@@ -12,7 +12,7 @@
         // Call Amazon Polly to synthesize and speak the label
         $.ajax({
             url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
-            type: 'POST',
+            type: 'GET',
             data: { label: label },
             success: function(response) {
                 // Handle Polly response (e.g., play the audio)

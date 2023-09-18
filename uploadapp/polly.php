@@ -4,7 +4,7 @@ require_once 'aws/aws-autoloader.php';
 
 use Aws\Polly\PollyClient;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["label"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET["label"])) {
     $awsKey = getenv("AWS_KEY");
     $awsSecret = getenv("AWS_SECRET");
     $awsRegion = 'us-east-1'; // Change to your desired region
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["label"])) {
         ],
     ]);
 
-    $label = $_POST["label"];
+    $label = $_GET["label"];
     $voiceId = 'Joanna'; // Change to the desired voice
 
     try {
@@ -27,9 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["label"])) {
             'Text' => $label,
             'VoiceId' => $voiceId,
         ]);
-
-        // Play the synthesized audio (you may want to save it or serve it differently)
+    
+        // Return the audio as a blob
         header('Content-Type: audio/mpeg');
+        header('Content-Disposition: inline; filename="speech.mp3"');
         echo $result['AudioStream']->getContents();
     } catch (Exception $e) {
         echo "Error synthesizing speech: " . $e->getMessage();
