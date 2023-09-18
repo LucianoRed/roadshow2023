@@ -4,7 +4,7 @@ require_once 'aws/aws-autoloader.php';
 
 use Aws\Polly\PollyClient;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET["label"])) {
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["label"])) {
     $awsKey = getenv("AWS_KEY");
     $awsSecret = getenv("AWS_SECRET");
     $awsRegion = 'us-east-1'; // Change to your desired region
