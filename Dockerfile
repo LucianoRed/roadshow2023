@@ -6,6 +6,7 @@ RUN apt-get -y update && apt-get clean && \
     libicu-dev \
     libzip-dev \
     librdkafka-dev \
+    php-memcached \
     git \
     rsyslog && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
