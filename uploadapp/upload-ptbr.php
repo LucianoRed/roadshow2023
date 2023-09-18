@@ -7,7 +7,7 @@
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+    <script>
     function speakLabel(label) {
         // Call Amazon Polly to synthesize and speak the label
         $.ajax({
@@ -16,7 +16,16 @@
             data: { label: label },
             success: function(response) {
                 // Handle Polly response (e.g., play the audio)
-                alert(response);
+                var audio = new Audio('data:audio/mpeg;base64,' + response);
+                audio.id = 'audio_' + label;
+                audio.controls = true;
+                audio.style.display = 'block';
+
+                // Append the audio element to the document
+                document.body.appendChild(audio);
+
+                // Play the audio
+                audio.play();
             },
             error: function() {
                 // Handle Polly synthesis error
@@ -25,6 +34,7 @@
         });
     }
 </script>
+
 </head>
 <body>
 <?php
@@ -102,6 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
                     echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
                     echo '<button onclick="speakLabel(\'' . $translatedLabel . '\')">Ouvir</button>';
+                    echo '<audio id="audio_' . $translatedLabel . '" controls style="display:none;"></audio>';
+
 
                 }
                 // ===========================
