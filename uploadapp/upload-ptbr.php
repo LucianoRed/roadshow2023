@@ -8,40 +8,26 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-   function speakLabel(label) {
-    // Call Amazon Polly to synthesize and speak the label
-    $.ajax({
-        url: 'polly.php', // Create a separate PHP file to handle Polly synthesis
-        type: 'GET',
-        data: { label: label },
-        responseType: 'blob', // Set the response type to blob
-        success: function(response) {
-            // Create a Blob URL from the audio blob
-            var blob = new Blob([response], { type: 'audio/mpeg' });
-            var url = window.URL.createObjectURL(blob);
+        const audioPlayer = document.getElementById("audioPlayer");
+        const playButtons = document.querySelectorAll(".playButton");
 
-            // Create an audio element to play the audio
-            var audio = new Audio(url);
+        playButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const audioFile = button.getAttribute("data-audio");
+                const audioSource = "https://roadshow-2023-git2-upload.apps.teste.sandbox2448.opentlc.com/polly.php?label=" + encodeURIComponent(audioFile);
 
-            // Play the audio
-            audio.play().then(function () {
-                // Audio playback started
-            }).catch(function (error) {
-                // Handle any playback errors
-                console.error('Audio playback error: ' + error.message);
+                audioPlayer.src = audioSource;
+                audioPlayer.load(); // Load the new audio source
+                audioPlayer.play(); // Play the audio
             });
-        },
-        error: function() {
-            // Handle Polly synthesis error
-            alert('Error synthesizing speech.');
-        }
-    });
-}
-
-</script>
+        });
+    </script>
 
 </head>
 <body>
+<audio id="audioPlayer" controls>
+        <source src="" type="audio/mpeg">
+    </audio>
 <?php
 session_start();
 require_once 'aws/aws-autoloader.php';
@@ -114,11 +100,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
                     $translatedLabel = translateText($label['Name'], 'pt');
-
-                    echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
-                    echo '<button onclick="speakLabel(\'' . $translatedLabel . '\')">Ouvir</button>';
-                    echo '<audio id="audio_' . $translatedLabel . '" controls style="display:none;"></audio>';
-
+                    echo "<div>\n";
+                    echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
+                    echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
+                    echo "</div>\n";
 
                 }
                 // ===========================
