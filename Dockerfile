@@ -5,6 +5,7 @@ RUN apt-get -y update && apt-get clean && \
     libonig-dev \
     libicu-dev \
     libzip-dev \
+    libmemcached-dev \
     librdkafka-dev \
     git \
     rsyslog && \
