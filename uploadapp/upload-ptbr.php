@@ -6,28 +6,12 @@
     <title>Detector de artefatos</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        const audioPlayer = document.getElementById("audioPlayer");
-        const playButtons = document.querySelectorAll(".playButton");
-
-        playButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                const audioFile = button.getAttribute("data-audio");
-                const audioSource = "polly.php?label=" + encodeURIComponent(audioFile);
-
-                audioPlayer.src = audioSource;
-                audioPlayer.load(); // Load the new audio source
-                audioPlayer.play(); // Play the audio
-            });
-        });
-    </script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    
 
 </head>
 <body>
-<audio id="audioPlayer" controls>
-        <source src="" type="audio/mpeg">
-    </audio>
+<div>
 <?php
 session_start();
 require_once 'aws/aws-autoloader.php';
@@ -100,10 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
                     $translatedLabel = translateText($label['Name'], 'pt');
-                    echo "<div>\n";
                     echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
                     echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
-                    echo "</div>\n";
 
                 }
                 // ===========================
@@ -147,6 +129,25 @@ function translateText($text, $targetLanguage)
 
 
 ?>
+</div>
  <a href="index.php"><button type="button" name="voltar" class="btn btn-primary">Testar outra foto</button></a>
+ <audio id="audioPlayer" controls>
+        <source src="" type="audio/mpeg">
+    </audio>
+ <script>
+        const audioPlayer = document.getElementById("audioPlayer");
+        const playButtons = document.querySelectorAll(".playButton");
+
+        playButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const audioFile = button.getAttribute("data-audio");
+                const audioSource = "polly.php?label=" + encodeURIComponent(audioFile);
+
+                audioPlayer.src = audioSource;
+                audioPlayer.load(); // Load the new audio source
+                audioPlayer.play(); // Play the audio
+            });
+        });
+    </script>
 </body>
 </html>
