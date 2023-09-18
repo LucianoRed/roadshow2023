@@ -15,9 +15,9 @@ RUN docker-php-ext-install mysqli && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install exif && \
     docker-php-ext-install intl && \
-    docker-php-ext-install memcached && \
     docker-php-ext-install zip && \
     pecl install rdkafka && \
+    pecl install memcached && \
     docker-php-ext-install -j$(nproc) iconv && \
     rm -r /tmp/* /var/cache/* && rm -rf /var/lib/apt/lists/*
 
