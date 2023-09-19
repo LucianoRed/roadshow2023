@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
                     echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
                     } else {
-                        echo "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.";
+                        echo "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.<br>\n";
                         //echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
 
                     }
