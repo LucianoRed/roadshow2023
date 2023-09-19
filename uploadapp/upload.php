@@ -9,16 +9,28 @@ session_start();
     <title>Detector de artefatos</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    .imagem-responsiva {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
 </head>
 <body>
 <?php
 require_once 'aws/aws-autoloader.php';
 require_once "Kafka.class.php";
 
+$conteudo = "";
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploads/";
     $sessionId = session_id();
     $targetFile = $targetDir . $sessionId . "_" . basename($_FILES["image"]["name"]);
+    $image_name_future =  $sessionId . "_" . basename($_FILES["image"]["name"]);
+
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
@@ -81,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 $json_results = json_encode($result['Labels']);
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
-                    echo "Encontrado <b>".$label['Name'] . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
+                    $conteudo .= "Encontrado <b>".$label['Name'] . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
                 }
                 // ===========================
                 // Jogando para Kafka
@@ -100,6 +112,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     }
 }
 ?>
+<div>
+    <img src="mostra_foto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
+</div>
+<div>
+
+    <?php echo $conteudo;?>
+</div>
  <a href="index.php"><button type="button" name="voltar" class="btn btn-primary">Testar outra foto</button></a>
 </body>
 </html>

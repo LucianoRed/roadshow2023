@@ -120,6 +120,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             echo "Sorry, there was an error uploading your file.";
         }
     }
+    $fp = fopen("$targetFile.json", "w+");
+    fputs($fp, $json_results);
+    fclose($fp);
 }
 function translateText($text, $targetLanguage)
 {
@@ -149,7 +152,7 @@ function translateText($text, $targetLanguage)
 </div>
 
 <div>
-    <img src="mostra_foto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva">
+    <img src="mostra_foto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
 </div>
 <div>
 
