@@ -1,0 +1,57 @@
+<?php
+// Path to the input image
+
+
+$inputImagePath = "uploads/".$_GET['image_name'];
+$jsonData = file_get_contents("$inputImagePath.json");
+
+
+// Step 2: Parse the JSON data into a PHP object
+$responseData = json_decode($jsonData);
+
+
+// Load the input image
+$inputImage = imagecreatefromjpeg($inputImagePath);
+
+if (!$inputImage) {
+    die('Unable to load the input image.');
+}
+// Get the image dimensions
+$imageWidth = imagesx($inputImage);
+$imageHeight = imagesy($inputImage);
+
+// Loop through each bounding box in the response
+foreach ($responseData as $object) {
+    if (isset($object['Instances'][0]['BoundingBox'])) {
+        // Extract bounding box information for this object
+        $boundingBox = $object['Instances'][0]['BoundingBox'];
+        $width = $boundingBox['Width'];
+        $height = $boundingBox['Height'];
+        $left = $boundingBox['Left'];
+        $top = $boundingBox['Top'];
+
+        // Calculate square coordinates and size
+        $squareX = $left * $imageWidth;
+        $squareY = $top * $imageHeight;
+        $squareSize = min($width * $imageWidth, $height * $imageHeight);
+
+        // Draw a square around the object
+        $color = imagecolorallocate($inputImage, 255, 0, 0); // Red color (you can change the color as needed)
+        imagerectangle(
+            $inputImage,
+            $squareX,
+            $squareY,
+            $squareX + $squareSize,
+            $squareY + $squareSize,
+            $color
+        );
+    }
+}
+
+// Set the header to output the image as PNG with alpha transparency
+header('Content-Type: image/jpeg'); // Set the header for image output
+imagejpeg($inputImage); // Output the mod
+
+// Clean up resources
+imagedestroy($inputImage);
+?>
