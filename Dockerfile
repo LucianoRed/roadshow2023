@@ -19,13 +19,13 @@ RUN docker-php-ext-install mysqli && \
     docker-php-ext-install exif && \
     docker-php-ext-install intl && \
     docker-php-ext-install zip && \
-    docker-php-ext-configure gd --with-jpeg && \
+    docker-php-ext-install gd && \
     pecl install rdkafka && \
     pecl install memcached && \
     docker-php-ext-install -j$(nproc) iconv && \
-    docker-php-ext-install -j$(nproc) gd && \
     rm -r /tmp/* /var/cache/* && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-enable memcached
+RUN docker-php-ext-enable gd
 COPY DockerConfigFiles/apache2.conf /etc/apache2/apache2.conf
 COPY DockerConfigFiles/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY DockerConfigFiles/ports.conf /etc/apache2/ports.conf
