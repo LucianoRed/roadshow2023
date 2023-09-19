@@ -50,10 +50,10 @@ imagefilledrectangle($inputImage, $squareX, $squareY, $squareX + $squareSize, $s
         
 $text = $Objeto->Name;
 $textColor = imagecolorallocate($inputImage, 0, 0, 0); // Black text color
-$font = 'arial.ttf'; // Specify the path to a TrueType font file
+$font = 5; // Specify the path to a TrueType font file
 
 // Calculate the position to center the text inside the first square
-$textX = $squareX1 + ($squareSize - imagefontwidth(5) * strlen($text)) / 2;
+$textX = $squareX + ($squareSize - imagefontwidth(5) * strlen($text)) / 2;
 $textY = $squareY + ($squareSize - imagefontheight(5)) / 2;
 
 // Add text to the image
