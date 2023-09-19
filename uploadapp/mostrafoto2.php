@@ -48,16 +48,16 @@ imagesavealpha($inputImage, true);
 // Fill the first square with the semi-transparent color
 imagefilledrectangle($inputImage, $squareX, $squareY, $squareX + $squareSize, $squareY + $squareSize, $squareColor);
         
-$text = $Objeto->Name;
-$textColor = imagecolorallocate($inputImage, 0, 0, 0); // Black text color
-$font = 5; // Specify the path to a TrueType font file
+// $text = $Objeto->Name;
+// $textColor = imagecolorallocate($inputImage, 0, 0, 0); // Black text color
+// $font = 5; // Specify the path to a TrueType font file
 
-// Calculate the position to center the text inside the first square
-$textX = $squareX + ($squareSize - imagefontwidth(5) * strlen($text)) / 2;
-$textY = $squareY + ($squareSize - imagefontheight(5)) / 2;
+// // Calculate the position to center the text inside the first square
+// $textX = $squareX + ($squareSize - imagefontwidth(5) * strlen($text)) / 2;
+// $textY = $squareY + ($squareSize - imagefontheight(5)) / 2;
 
-// Add text to the image
-imagestring($inputImage, 5, $textX, $textY, $text, $textColor);
+// // Add text to the image
+// imagestring($inputImage, 5, $textX, $textY, $text, $textColor);
         // Draw a square around the object
         // $color = imagecolorallocate($inputImage, 255, 0, 0); // Red color (you can change the color as needed)
         // imagerectangle(

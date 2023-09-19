@@ -126,13 +126,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     fclose($fp);
 }
 ?>
-<div>
+<!-- <div>
     <img src="mostrafoto2.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
-</div>
-<div>
+</div> -->
 <div class="image-container">
         <img src="mostrafoto2.php?image_name=<?php echo $image_name_future;?>" alt="Sua imagem">
     </div>
+<div>
+
 
     <?php echo $conteudo;?>
 </div>

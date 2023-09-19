@@ -15,6 +15,17 @@ session_start();
         max-width: 100%;
         height: auto;
     }
+    .image-container {
+    max-width: 400px; /* Set the maximum width */
+    margin: 0 auto; /* Center the image container */
+}
+
+/* Style for the image itself */
+.image-container img {
+    width: 100%; /* Make the image take up 100% of the container's width */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
 </style>
 
 </head>
@@ -151,9 +162,9 @@ function translateText($text, $targetLanguage)
 ?>
 </div>
 
-<div>
-    <img src="mostrafoto2.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
-</div>
+<div class="image-container">
+        <img src="mostrafoto2.php?image_name=<?php echo $image_name_future;?>" alt="Sua imagem"><br>
+    </div>
 <div>
 
     <?php echo $conteudo;?>
