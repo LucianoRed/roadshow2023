@@ -12,11 +12,6 @@
         port: 8081
 
   rules:
-    - name: debug with multiple messages
-      condition: event.i >= 0
-      action:
-        debug:
-          msg: "Mensagemmmmmmmmmmmmmm 1 {{ event }}"
     - name: kafka
       condition: event.message == ""
       action:
