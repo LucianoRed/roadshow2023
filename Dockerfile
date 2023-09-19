@@ -7,6 +7,8 @@ RUN apt-get -y update && apt-get clean && \
     libzip-dev \
     libmemcached-dev \
     librdkafka-dev \
+    libpng-dev \
+    libjpeg-dev \
     git \
     rsyslog && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -17,9 +19,11 @@ RUN docker-php-ext-install mysqli && \
     docker-php-ext-install exif && \
     docker-php-ext-install intl && \
     docker-php-ext-install zip && \
+    docker-php-ext-configure gd --with-jpeg && \
     pecl install rdkafka && \
     pecl install memcached && \
     docker-php-ext-install -j$(nproc) iconv && \
+    docker-php-ext-install -j$(nproc) gd && \
     rm -r /tmp/* /var/cache/* && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-enable memcached
 COPY DockerConfigFiles/apache2.conf /etc/apache2/apache2.conf
