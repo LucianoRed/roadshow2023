@@ -21,14 +21,17 @@ $imageWidth = imagesx($inputImage);
 $imageHeight = imagesy($inputImage);
 
 // Loop through each bounding box in the response
-foreach ($responseData as $object) {
-    if (isset($object->Instances[0]['BoundingBox'])) {
-        // Extract bounding box information for this object
-        $boundingBox = $object['Instances'][0]['BoundingBox'];
-        $width = $boundingBox['Width'];
-        $height = $boundingBox['Height'];
-        $left = $boundingBox['Left'];
-        $top = $boundingBox['Top'];
+for($x=0;$x<sizeof($dataObject);$x++) {
+	$Objeto = $dataObject[$x];
+	$Instances = $Objeto->Instances;
+	if(sizeof($Instances) > 0) {
+		$Instance = $Instances[0];
+		$boundingBox = $Instance->BoundingBox;
+		$width = $boundingBox->Width;
+		$height = $boundingBox->Height;
+		$left = $boundingBox->Left;
+		$top = $boundingBox->Top;
+
 
         // Calculate square coordinates and size
         $squareX = $left * $imageWidth;
