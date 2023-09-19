@@ -110,10 +110,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             echo "Sorry, there was an error uploading your file.";
         }
     }
+    $fp = fopen("$targetFile.json", "w+");
+    fputs($fp, $json_results);
+    fclose($fp);
 }
 ?>
 <div>
-    <img src="mostra_foto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
+    <img src="mostrafoto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
 </div>
 <div>
 
