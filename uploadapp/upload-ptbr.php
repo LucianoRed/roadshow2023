@@ -10,7 +10,12 @@ session_start();
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    
+    <style>
+    .imagem-responsiva {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
 
 </head>
 <body>
@@ -19,10 +24,13 @@ session_start();
 require_once 'aws/aws-autoloader.php';
 require_once "Kafka.class.php";
 
+$conteudo = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploads/";
     $sessionId = session_id();
     $targetFile = $targetDir . $sessionId . "_" . basename($_FILES["image"]["name"]);
+    $image_name_future =  $sessionId . "_" . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
@@ -88,10 +96,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $inteiropercent = intval($label['Confidence']);
                     if($inteiropercent > 85) {
                     $translatedLabel = translateText($label['Name'], 'pt');
-                    echo "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
-                    echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
+                    $conteudo .= "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
+                    $conteudo .= "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
                     } else {
-                        echo "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.<br>\n";
+                        $conteudo .= "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.<br>\n";
                         //echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
 
                     }
@@ -138,6 +146,14 @@ function translateText($text, $targetLanguage)
 
 
 ?>
+</div>
+
+<div>
+    <img src="mostra_foto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva">
+</div>
+<div>
+
+    <?php echo $conteudo;?>
 </div>
  <a href="index.php"><button type="button" name="voltar" class="btn btn-primary">Testar outra foto</button></a>
  <audio id="audioPlayer" controls>
