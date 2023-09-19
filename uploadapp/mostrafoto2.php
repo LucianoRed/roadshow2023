@@ -22,7 +22,7 @@ $imageHeight = imagesy($inputImage);
 
 // Loop through each bounding box in the response
 foreach ($responseData as $object) {
-    if (isset($object['Instances'][0]['BoundingBox'])) {
+    if (isset($object->Instances[0]['BoundingBox'])) {
         // Extract bounding box information for this object
         $boundingBox = $object['Instances'][0]['BoundingBox'];
         $width = $boundingBox['Width'];
@@ -34,6 +34,7 @@ foreach ($responseData as $object) {
         $squareX = $left * $imageWidth;
         $squareY = $top * $imageHeight;
         $squareSize = min($width * $imageWidth, $height * $imageHeight);
+        
 
         // Draw a square around the object
         $color = imagecolorallocate($inputImage, 255, 0, 0); // Red color (you can change the color as needed)
