@@ -5,6 +5,8 @@ $inputImagePath = "uploads/".$_GET['image_name'];
 // Load the input image
 $inputImage = imagecreatefromjpeg($inputImagePath);
 
+
+
 if (!$inputImage) {
     die('Unable to load the input image.');
 }

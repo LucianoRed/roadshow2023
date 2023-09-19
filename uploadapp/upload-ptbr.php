@@ -152,7 +152,7 @@ function translateText($text, $targetLanguage)
 </div>
 
 <div>
-    <img src="mostrafoto.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
+    <img src="mostrafoto2.php?image_name=<?php echo $image_name_future;?>"  class="imagem-responsiva"><br>
 </div>
 <div>
 
