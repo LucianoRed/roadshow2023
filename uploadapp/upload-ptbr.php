@@ -167,7 +167,7 @@ function translateText($text, $targetLanguage)
     </div>
 <div>
 
-    <?php echo $conteudo;?>
+    <?php echo $conteudo;?><br>
 </div>
  <a href="index.php"><button type="button" name="voltar" class="btn btn-primary">Testar outra foto</button></a>
  <audio id="audioPlayer" controls>
