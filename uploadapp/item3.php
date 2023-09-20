@@ -2,7 +2,7 @@
 // Path to the input image
 
 
-$inputImagePath = "uploads/fone.jpg";
+$inputImagePath = "uploads/celular.jpg";
 
 if(!file_exists($inputImagePath)) {
     $inputImagePath = "notfound.jpg";

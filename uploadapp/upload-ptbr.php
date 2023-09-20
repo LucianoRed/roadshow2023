@@ -146,6 +146,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                         copy( $targetFile, "uploads/knife.jpg");
                         $response = sendHttpPostRequest($message, $url);
                     }
+                    if($label['Name'] == "Phone") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/celular.jpg");
+                        //$response = sendHttpPostRequest($message, $url);
+                    }
                     } else {
                         $conteudo .= "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.<br>\n";
                         //echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
