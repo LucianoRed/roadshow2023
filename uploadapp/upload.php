@@ -114,6 +114,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                         copy( $targetFile, "uploads/mochila.jpg");
                         $response = sendHttpPostRequest($message, $url);
                     }
+                    if($label['Name'] == "Pen") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/caneta.jpg");
+                        //$response = sendHttpPostRequest($message, $url);
+                    }
+                    if($label['Name'] == "Phone") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/fone.jpg");
+                        //$response = sendHttpPostRequest($message, $url);
+                    }
                 }
                 // ===========================
                 // Jogando para Kafka
