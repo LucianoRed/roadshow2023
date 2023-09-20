@@ -14,6 +14,18 @@ session_start();
         max-width: 100%;
         height: auto;
     }
+
+    .image-container {
+    max-width: 400px; /* Set the maximum width */
+    margin: 0 auto; /* Center the image container */
+}
+
+/* Style for the image itself */
+.image-container img {
+    width: 100%; /* Make the image take up 100% of the container's width */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Remove extra space below the image */
+}
 </style>
 
 <!-- <img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva"> -->
@@ -21,7 +33,7 @@ session_start();
 </head>
 <body>
 <!-- <img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" alt="Descrição da imagem" class="img-fluid"> -->
-<img src="https://events.redhat.com/accounts/register123/redhat/readhat2/Logo-RedHat-BlackText-Large.png" class="imagem-responsiva">
+<img src="opentalk.jpg" class="imagem-responsiva">
 
 
     <div class="container mt-5">

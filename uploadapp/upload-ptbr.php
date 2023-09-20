@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $Kafka = new Kafka;
                     $Kafka->kafka_server = getenv("KAFKA_BROKERS");
                     $Kafka->kafka_topic = getenv("KAFKA_TOPIC");
-                    $Kafka->ProduzMensagem($json_results);
+                    $conteudo .= $Kafka->ProduzMensagem($json_results);
             } catch (Exception $e) {
                 echo "Error analyzing the image: " . $e->getMessage();
             }

@@ -48,7 +48,7 @@ $time_start = microtime(true);
 
 $time_end = microtime(true);
 $time = $time_end - $time_start;
-echo "Produced 1 messages in $time seconds<br>\n";
+return "Produzida 1 mensagem no kafka em $time segundos<br>\n";
     }
 }
 ?>
