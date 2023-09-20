@@ -156,6 +156,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $Kafka->kafka_server = getenv("KAFKA_BROKERS");
                     $Kafka->kafka_topic = getenv("KAFKA_TOPIC");
                     $conteudo .= $Kafka->ProduzMensagem($json_results);
+
+                    
+$filename = 'uploads/number.txt';
+
+// Check if the file exists
+if (file_exists($filename)) {
+    // Read the current number from the file
+    $currentNumber = (int) file_get_contents($filename);
+
+    // Increment the number by 1
+    $newNumber = $currentNumber + 1;
+
+    // Update the file with the new number
+    file_put_contents($filename, $newNumber);
+
+    echo "Number updated successfully. New number is $newNumber.";
+} else {
+    echo "File not found: $filename";
+    $fp = fopen("uploads/number.txt", "w+");
+    fputs($fp, "0");
+    fclose($fp);
+}
             } catch (Exception $e) {
                 echo "Error analyzing the image: " . $e->getMessage();
             }
