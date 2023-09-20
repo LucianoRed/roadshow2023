@@ -38,7 +38,7 @@ session_start();
 
     <div class="container mt-5">
         <h1>Detector de artefatos</h1>
-        <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <form action="upload-ptbr.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="image">Escolha ou tire uma foto:</label>
                 <input type="file" name="image" id="image" class="form-control-file">
