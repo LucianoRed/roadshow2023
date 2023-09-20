@@ -35,7 +35,7 @@ require_once "Kafka.class.php";
 require_once "functions.php";
 
 $conteudo = "";
-$url_eda = getenv("ANSIBLE-EDA");
+$url_eda = getenv("ANSIBLE_EDA");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploads/";
