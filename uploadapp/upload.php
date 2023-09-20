@@ -36,6 +36,7 @@ require_once "functions.php";
 
 $conteudo = "";
 $url_eda = getenv("ANSIBLE_EDA");
+$url_eda_cop = getenv("ANSIBLE_EDA_COP");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploads/";
@@ -129,6 +130,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                         //copy( string $source, string $destination, resource $context )
                         copy( $targetFile, "uploads/fone.jpg");
                         //$response = sendHttpPostRequest($message, $url);
+                    }
+                    if($label['Name'] == "Knife") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda_cop/endpoint";
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/knife.jpg");
+                        $response = sendHttpPostRequest($message, $url);
                     }
                 }
                 // ===========================
