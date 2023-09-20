@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
 $directory = 'uploads/'; // Replace with the path to your directory
 
 // Use scandir to list files in the directory
