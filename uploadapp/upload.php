@@ -106,11 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
                     $conteudo .= "Encontrado <b>".$label['Name'] . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
-                    if($label['Name'] == "Backpacking") 
+                    if($label['Name'] == "Backpack") 
                     {
                         $message = "$image_name_future";
                         $url = "http://$url_eda/endpoint";
-                        
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/mochila.jpg");
                         $response = sendHttpPostRequest($message, $url);
                     }
                 }
