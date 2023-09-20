@@ -32,9 +32,10 @@ session_start();
 <?php
 require_once 'aws/aws-autoloader.php';
 require_once "Kafka.class.php";
+require_once "functions.php";
 
 $conteudo = "";
-
+$url_eda = getenv("ANSIBLE-EDA");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $targetDir = "uploads/";
@@ -105,6 +106,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
               //  var_dump($json_results);
                 foreach ($result['Labels'] as $label) {
                     $conteudo .= "Encontrado <b>".$label['Name'] . "</b> com grau de certeza de: " . $label['Confidence'] . "%<br>\n";
+                    if($label['Name'] == "Backpacking") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        
+                        $response = sendHttpPostRequest($message, $url);
+                    }
                 }
                 // ===========================
                 // Jogando para Kafka

@@ -34,6 +34,7 @@ session_start();
 <?php
 require_once 'aws/aws-autoloader.php';
 require_once "Kafka.class.php";
+require_once "functions.php";
 
 $conteudo = "";
 
@@ -109,6 +110,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $translatedLabel = translateText($label['Name'], 'pt');
                     $conteudo .= "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
                     $conteudo .= "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
+                    if($label['Name'] == "Backpacking") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        
+                        $response = sendHttpPostRequest($message, $url);
+                    }
                     } else {
                         $conteudo .= "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.<br>\n";
                         //echo "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
