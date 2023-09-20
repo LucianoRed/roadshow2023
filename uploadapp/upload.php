@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                         copy( $targetFile, "uploads/caneta.jpg");
                         //$response = sendHttpPostRequest($message, $url);
                     }
-                    if($label['Name'] == "Phone") 
+                    if($label['Name'] == "Headphones") 
                     {
                         $message = "$image_name_future";
                         $url = "http://$url_eda/endpoint";

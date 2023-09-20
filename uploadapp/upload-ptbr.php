@@ -112,12 +112,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     $translatedLabel = translateText($label['Name'], 'pt');
                     $conteudo .= "Encontrado <b>". $translatedLabel . "</b> com grau de certeza de: " . $label['Confidence'] . "%";
                     $conteudo .= "<button class=\"playButton\" data-audio=\"$translatedLabel\">Ouvir $translatedLabel</button><br>\n";
-                    if($label['Name'] == "Backpacking") 
+                    if($label['Name'] == "Backpack") 
                     {
                         $message = "$image_name_future";
                         $url = "http://$url_eda/endpoint";
-                        
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/mochila.jpg");
                         $response = sendHttpPostRequest($message, $url);
+                    }
+                    if($label['Name'] == "Pen") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/caneta.jpg");
+                        //$response = sendHttpPostRequest($message, $url);
+                    }
+                    if($label['Name'] == "Headphones") 
+                    {
+                        $message = "$image_name_future";
+                        $url = "http://$url_eda/endpoint";
+                        //copy( string $source, string $destination, resource $context )
+                        copy( $targetFile, "uploads/fone.jpg");
+                        //$response = sendHttpPostRequest($message, $url);
                     }
                     } else {
                         $conteudo .= "Tambem Encontrado <b>". $label['Name'] . "</b> porém com grau de certeza de: " . $label['Confidence'] . "%. Por isso não traduzimos.<br>\n";
