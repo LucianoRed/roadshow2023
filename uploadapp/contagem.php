@@ -7,7 +7,7 @@ $directory = 'uploads/'; // Replace with the path to your directory
 $files = scandir($directory);
 
 // Count the number of files (excluding . and ..)
-$fileCount = (count($files) - 2)/2;
+$fileCount = intval((count($files) - 2)/2);
 
 echo $fileCount;
 ?>
