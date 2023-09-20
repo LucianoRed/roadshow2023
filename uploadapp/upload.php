@@ -171,9 +171,9 @@ if (file_exists($filename)) {
     // Update the file with the new number
     file_put_contents($filename, $newNumber);
 
-    echo "Number updated successfully. New number is $newNumber.";
+   // echo "Number updated successfully. New number is $newNumber.";
 } else {
-    echo "File not found: $filename";
+   // echo "File not found: $filename";
     $fp = fopen("uploads/number.txt", "w+");
     fputs($fp, "0");
     fclose($fp);
